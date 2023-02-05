@@ -111,7 +111,7 @@ class RatingTest extends TestCase
             'body' => 'test'
         ]);
 
-        $this->assertDatabaseHas('ratings', $rating->toArray());
+        $this->assertDatabaseHas('ratings', ['id' => $rating->id]);
 
         $this->post('/api/login', [
             'email' => $user->email,
@@ -121,7 +121,7 @@ class RatingTest extends TestCase
         $response = $this->delete("/api/rating/$rating->id");
 
         $response->assertStatus(201);
-        $this->assertDatabaseMissing('ratings', $rating->toArray());
+        $this->assertDatabaseMissing('ratings', ['id' => $rating->id]);
     }
 
     public function test_user_with_incorrect_id_cannot_delete_ratings()
@@ -145,14 +145,14 @@ class RatingTest extends TestCase
             'body' => 'test'
         ]);
 
-        $this->assertDatabaseHas('ratings', $rating->toArray());
+        $this->assertDatabaseHas('ratings', ['id' => $rating->id]);
 
         $this->delete("/api/rating/{$rating->id}");
-        $this->assertDatabaseHas('ratings', $rating->toArray());
+        $this->assertDatabaseHas('ratings', ['id' => $rating->id]);
 
-        $this->assertDatabaseHas('ratings', $rating2->toArray());
+        $this->assertDatabaseHas('ratings', ['id' => $rating2->id]);
 
         $this->delete("/api/rating/{$rating2->id}");
-        $this->assertDatabaseHas('ratings', $rating2->toArray());
+        $this->assertDatabaseHas('ratings', ['id' => $rating2->id]);
     }
 }

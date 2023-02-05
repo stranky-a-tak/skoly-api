@@ -53,7 +53,7 @@ class UserProfileTest extends TestCase
         $response = $this->patch("/api/profile/" . $user->id, $data);
 
         $response->assertStatus(200);
-        $this->assertDatabaseHas('users', ['name' => 'Janko Hrasko', 'age' => 18]);
+        $this->assertDatabaseHas('users', ['name' => 'Janko Hrasko', 'age' => "18"]);
         $this->assertDatabaseMissing('users', ['name' => $user->name]);
     }
 }
