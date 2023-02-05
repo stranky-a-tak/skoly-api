@@ -46,7 +46,7 @@ class UserProfileTest extends TestCase
         $user = $this->login();
 
         $data = [
-            'name' => 'Janko hrasko',
+            'name' => 'Janko Hrasko',
             'age' => 18,
         ];
 
