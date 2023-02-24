@@ -32,7 +32,7 @@ class CollagesTest extends TestCase
             ]
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_search_returns_correct_data()
@@ -40,7 +40,7 @@ class CollagesTest extends TestCase
         $collage = $this->getCollage();
         $response = $this->post('/api/collages', ['search' => 'fei']);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertJson(
             [
                 'data' => [
@@ -60,7 +60,7 @@ class CollagesTest extends TestCase
     {
         $response = $this->get('/api/collage/fei-stu');
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 'id',
@@ -91,7 +91,7 @@ class CollagesTest extends TestCase
         $collage = $this->getCollage();
         $response = $this->get('/api/collage/fei-stu');
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertJson(
             [
                 'data' => [

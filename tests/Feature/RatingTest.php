@@ -26,6 +26,31 @@ class RatingTest extends TestCase
         $this->assertDatabaseHas('ratings', $data);
     }
 
+    public function test_access_show_post_page()
+    {
+        //post rating
+        $data = [
+            'collage_id' => 1,
+            'user_id' => null,
+            'rating' => 4,
+            'body' => 'test'
+        ];
+        $response = $this->post('/api/rating', $data);
+
+        $response->assertCreated();
+        $this->assertDatabaseHas('ratings', $data);
+
+        $showRatingRes = $this->get("/api/rating/" . $response['rating']['id']);
+        $showRatingRes->assertJson([
+            'data' => [
+                'id' => $response['rating']['id'],
+                'rating' => $response['rating']['rating'],
+                'body' => $response['rating']['body'],
+                'user' => null,
+            ]
+        ]);
+    }
+
     public function test_post_review_rating_is_required_validation()
     {
         $data = [
@@ -39,7 +64,7 @@ class RatingTest extends TestCase
             'X-Requested-With' => 'XMLHttpRequest'
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
         $this->assertDatabaseMissing('ratings', $data);
     }
 
@@ -120,7 +145,7 @@ class RatingTest extends TestCase
 
         $response = $this->delete("/api/rating/$rating->id");
 
-        $response->assertStatus(201);
+        $response->assertCreated();
         $this->assertDatabaseMissing('ratings', ['id' => $rating->id]);
     }
 

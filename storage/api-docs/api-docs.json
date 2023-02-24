@@ -207,26 +207,21 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "data": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "number",
-                                                    "example": 1
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "tvojtato"
-                                                },
-                                                "email": {
-                                                    "type": "string",
-                                                    "example": "tvojtato@email.com"
-                                                },
-                                                "age": {
-                                                    "type": "number",
-                                                    "example": 16
-                                                }
-                                            },
-                                            "type": "object"
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "tvojtato"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "tvojtato@email.com"
+                                        },
+                                        "age": {
+                                            "type": "number",
+                                            "example": 16
                                         }
                                     },
                                     "type": "object"

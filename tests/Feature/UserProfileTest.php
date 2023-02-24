@@ -19,7 +19,7 @@ class UserProfileTest extends TestCase
         ]);
 
         $response = $this->get(sprintf("/api/profile/%s", $user->id));
-        $response->assertStatus(401);
+        $response->assertUnauthorized();
     }
 
     public function test_user_profile_get_request_returns_correct_data()
@@ -38,7 +38,7 @@ class UserProfileTest extends TestCase
             ]
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_user_can_edit_his_profile()
@@ -52,7 +52,7 @@ class UserProfileTest extends TestCase
 
         $response = $this->patch("/api/profile/" . $user->id, $data);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertDatabaseHas('users', ['name' => 'Janko Hrasko', 'age' => "18"]);
         $this->assertDatabaseMissing('users', ['name' => $user->name]);
     }

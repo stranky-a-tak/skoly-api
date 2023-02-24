@@ -23,7 +23,7 @@ class RegisterTest extends TestCase
 
         $this->assertDatabaseHas('users', ['name' => 'Test123']);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertJson(['message' => 'Úspešne ste sa zaregistrovali']);
     }
 
@@ -62,7 +62,7 @@ class RegisterTest extends TestCase
 
         $response = $this->post('/api/register', $data);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
         $response->assertJson(['message' => 'Heslá sa musia zhodovať']);
         $this->assertDatabaseMissing('users', ['name' => 'Test123']);
     }
@@ -78,7 +78,7 @@ class RegisterTest extends TestCase
 
         $response = $this->post('/api/register', $data);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
         $response->assertJson(['message' => 'Heslo musí mať najmennej 6 znakov']);
         $this->assertDatabaseMissing('users', ['name' => 'Test123']);
     }

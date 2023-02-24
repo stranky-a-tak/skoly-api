@@ -22,7 +22,7 @@ class LoginTest extends TestCase
 
         $this->assertDatabaseHas('users', ['name' => 'Test123']);
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
         unset($data['name'], $data['password_confirmation']);
 
@@ -37,7 +37,7 @@ class LoginTest extends TestCase
             'password' => 'zleheslo123'
         ]);
 
-        $loginResponse->assertStatus(401);
+        $loginResponse->assertUnauthorized();
         $loginResponse->assertJsonStructure(['error']);
     }
 
@@ -46,7 +46,7 @@ class LoginTest extends TestCase
         $data = $this->registerUser();
         $loginResponse = $this->post('/api/login', $data);
 
-        $loginResponse->assertStatus(200);
+        $loginResponse->assertOk();
         $loginResponse->assertJsonStructure([
             'user' => [
                 'id',
@@ -59,6 +59,21 @@ class LoginTest extends TestCase
 
         $this->assertDatabaseHas('personal_access_tokens', [
             'tokenable_id' => $loginResponse['user']['id']
+        ]);
+    }
+
+    public function test_get_instance_of_logged_in_user()
+    {
+        $response = $this->get('/api/user');
+        $response->assertUnauthorized();
+
+        $user = $this->login();
+        $response = $this->get('/api/user');
+        $response->assertOk();
+        $response->assertJson([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email
         ]);
     }
 }

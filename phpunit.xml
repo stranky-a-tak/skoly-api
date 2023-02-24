@@ -27,7 +27,7 @@
             <file>./app/Http/Middleware/TrustHosts.php</file>
             <file>./app/Http/Middleware/TrimStrings.php</file>
             <file>./app/Http/Middleware/ValidateSignature.php</file>
-            <file>./app/Http/Middleware/VerifyCrsfToken.php</file>
+            <file>./app/Http/Middleware/VerifyCsrfToken.php</file>
             <file>./app/Providers/AppServiceProvider.php</file>
             <file>./app/Providers/AuthServiceProvdiver.php</file>
             <file>./app/Providers/BroadcastServiceProvider.php</file>

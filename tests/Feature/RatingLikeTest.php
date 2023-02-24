@@ -26,7 +26,7 @@ class RatingLikeTest extends TestCase
     {
         $rating = $this->getRating();
         $response = $this->post("/api/rating/$rating->id/like");
-        $response->assertStatus(200);
+        $response->assertOk();
 
         $this->assertDatabaseHas('rating_likes', ['rating_id' => $rating->id]);
     }
@@ -37,11 +37,11 @@ class RatingLikeTest extends TestCase
 
         //like a review
         $response = $this->post("api/rating/$rating->id/like");
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertDatabaseHas('rating_likes', ['rating_id' => $rating->id]);
 
         $response = $this->delete("/api/rating/$rating->id/unlike");
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertDatabaseMissing('rating_likes', ['rating_id' => $rating->id]);
     }
 }

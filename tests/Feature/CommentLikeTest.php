@@ -36,7 +36,7 @@ class CommentLikeTest extends TestCase
         $comment = $this->getComment();
 
         $response = $this->post("/api/comment/$comment->id/like");
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertDatabaseHas("comment_likes", ['comment_id' => $comment->id]);
     }
 
@@ -45,11 +45,11 @@ class CommentLikeTest extends TestCase
         $comment = $this->getComment();
 
         $response = $this->post("/api/comment/$comment->id/like");
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertDatabaseHas("comment_likes", ['comment_id' => $comment->id]);
 
         $response = $this->delete("/api/comment/$comment->id/unlike");
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertDatabaseMissing("comment_likes", ['comment_id' => $comment->id]);
     }
 }
