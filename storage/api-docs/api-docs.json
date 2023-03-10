@@ -1,0 +1,889 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Skoli api",
+        "version": "1.0.0",
+        "x-logo": {
+            "url": "https://via.placeholder.com/190x90.png?text=L5-Swagger"
+        }
+    },
+    "paths": {
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Create a user",
+                "operationId": "8a56853624e025573120a09a4c75d468",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "age": {
+                                                "type": "integer"
+                                            },
+                                            "password": {
+                                                "type": "string"
+                                            },
+                                            "password_confirmation": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Janko hrasko",
+                                    "email": "janko@email.com",
+                                    "age": 15,
+                                    "password": "hrasko123",
+                                    "password_confirmation": "hrasko123"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "object",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failed validation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Musite mat viac ako 16 rokov"
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "age": {
+                                                    "type": "object",
+                                                    "example": "Musite mat viac ako 16 rokov"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login",
+                "operationId": "a3b306d14572d1f4bd6c064b3233e7b8",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "password": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "email": "janko@email.com",
+                                    "password": "hrasko123"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Logged in successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "tvojtato"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "tvojtato@email.com"
+                                                },
+                                                "age": {
+                                                    "type": "number",
+                                                    "example": 16
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failed validation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Email musi byt uz zaregistrovany"
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "email": {
+                                                    "type": "object",
+                                                    "example": "Email musi byt uz zaregistrovany"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Returns the user instance",
+                "operationId": "7c1cf647d76fad4b3eb1549fa4fe2f4c",
+                "responses": {
+                    "200": {
+                        "description": "User is logged in",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "tvojtato"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "tvojtato@email.com"
+                                        },
+                                        "age": {
+                                            "type": "number",
+                                            "example": 16
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User is not logged in",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logs out the user",
+                "operationId": "fe8f3429cd6979b3b4517e186505f9f9",
+                "responses": {
+                    "200": {
+                        "description": "User logged out successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "object",
+                                            "example": "Uspesne ste sa odhlasili"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User is not logged in",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/collages": {
+            "post": {
+                "tags": [
+                    "Collages"
+                ],
+                "summary": "Returns a list of collages based on search",
+                "operationId": "80495c7d05133cd363f897872f3a6cbd",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "properties": {
+                                            "search": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "search": "Fiit"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "We successfully return a list of collage",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "fiit-stu"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "FIIT STU"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Toto je popis ku skole FIIT STU"
+                                                },
+                                                "founded_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "1999-01-01"
+                                                },
+                                                "average_rating": {
+                                                    "type": "integer",
+                                                    "example": 4
+                                                },
+                                                "rating_count": {
+                                                    "type": "integer",
+                                                    "example": 90
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/collage/{slug}": {
+            "get": {
+                "tags": [
+                    "Collages"
+                ],
+                "summary": "Returns a single collage resource",
+                "operationId": "07dd082f5a031b4bd84ef551556c9b23",
+                "responses": {
+                    "200": {
+                        "description": "We successfully return a single resource of a collage",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "fiit-stu"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "FIIT STU"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Toto je popis ku skole FIIT STU"
+                                                },
+                                                "founded_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "1999-01-01"
+                                                },
+                                                "average_rating": {
+                                                    "type": "integer",
+                                                    "example": 4
+                                                },
+                                                "rating_count": {
+                                                    "type": "integer",
+                                                    "example": 90
+                                                },
+                                                "ratings": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "rating": {
+                                                            "type": "integer",
+                                                            "example": 5
+                                                        },
+                                                        "body": {
+                                                            "type": "string",
+                                                            "example": "Celkom fajn"
+                                                        },
+                                                        "likes": {
+                                                            "type": "integer",
+                                                            "example": 12
+                                                        },
+                                                        "user": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Janko hrasko"
+                                                                },
+                                                                "email": {
+                                                                    "type": "string",
+                                                                    "example": "janko@email.com"
+                                                                },
+                                                                "age": {
+                                                                    "type": "16",
+                                                                    "example": 12
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "comments": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "body": {
+                                                                    "type": "string",
+                                                                    "example": "Velka pravda sefko"
+                                                                },
+                                                                "user": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": 11
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Petko hrasko"
+                                                                        },
+                                                                        "email": {
+                                                                            "type": "string",
+                                                                            "example": "petko@email.com"
+                                                                        },
+                                                                        "age": {
+                                                                            "type": "16",
+                                                                            "example": 9
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/rating/{id}": {
+            "get": {
+                "tags": [
+                    "Rating"
+                ],
+                "summary": "Returns a single rating resource",
+                "operationId": "7ab57fb2200751c94a608e7ed7d78375",
+                "responses": {
+                    "200": {
+                        "description": "We successfully return a single resource of a collage",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "rating": {
+                                                    "type": "integer",
+                                                    "example": 5
+                                                },
+                                                "body": {
+                                                    "type": "string",
+                                                    "example": "Celkom fajn"
+                                                },
+                                                "likes": {
+                                                    "type": "integer",
+                                                    "example": 12
+                                                },
+                                                "user": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Janko hrasko"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "janko@email.com"
+                                                        },
+                                                        "age": {
+                                                            "type": "16",
+                                                            "example": 12
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "comments": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "1"
+                                                        },
+                                                        "body": {
+                                                            "type": "string",
+                                                            "example": "Velka pravda sefko"
+                                                        },
+                                                        "user": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 11
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Petko hrasko"
+                                                                },
+                                                                "email": {
+                                                                    "type": "string",
+                                                                    "example": "petko@email.com"
+                                                                },
+                                                                "age": {
+                                                                    "type": "16",
+                                                                    "example": 9
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Rating"
+                ],
+                "summary": "Deletes a rating",
+                "operationId": "5cad6480abeeed0dff91377402b5a3dc",
+                "responses": {
+                    "201": {
+                        "description": "We deleted the rating successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/rating": {
+            "post": {
+                "tags": [
+                    "Rating"
+                ],
+                "summary": "Stores a rating",
+                "operationId": "d004eb638d99824695952a07127a104a",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "collage_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_ip": {
+                                        "type": "string"
+                                    },
+                                    "rating": {
+                                        "type": "integer"
+                                    },
+                                    "body": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "collage_id": 1,
+                                    "user_id": 1,
+                                    "user_ip": "127.0.0.1",
+                                    "rating": 1,
+                                    "body": "pohodinda"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "We store the rating",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Success"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "collage_id": {
+                                                    "type": "integer",
+                                                    "example": 12
+                                                },
+                                                "user_id": {
+                                                    "type": "integer",
+                                                    "example": 12
+                                                },
+                                                "user_ip": {
+                                                    "type": "string",
+                                                    "example": "190.0.0.5"
+                                                },
+                                                "rating": {
+                                                    "type": "integer",
+                                                    "example": 5
+                                                },
+                                                "body": {
+                                                    "type": "string",
+                                                    "example": "Celkom fajn"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2022-12-10"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2022-12-10"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/rating/{id}/like": {
+            "post": {
+                "tags": [
+                    "Rating"
+                ],
+                "summary": "Likes a rating",
+                "operationId": "7a8120db2754c698cfd6b82dc6eccadc",
+                "responses": {
+                    "200": {
+                        "description": "Likes the rating",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Success"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/rating/{id}/unlike": {
+            "delete": {
+                "tags": [
+                    "Rating"
+                ],
+                "summary": "Unlikes a rating",
+                "operationId": "d78cad04d97a71c8cb24827323ffd9f1",
+                "responses": {
+                    "200": {
+                        "description": "Unlikes the rating",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Success"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/profile/{id}": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Get user data",
+                "operationId": "dc381917fc0ff732960235c596a202d1",
+                "responses": {
+                    "200": {
+                        "description": "Gets user data for the profile page",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Janko hrasko"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "janko@email.com"
+                                                },
+                                                "age": {
+                                                    "type": "integer",
+                                                    "example": 20
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Updates the profile",
+                "operationId": "74d5575b9329d290b47768b88d73766a",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "age": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "petko hrasko",
+                                    "age": 12
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "We store the rating",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Success"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
