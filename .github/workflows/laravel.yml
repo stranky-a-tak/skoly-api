@@ -31,6 +31,4 @@ jobs:
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
-          ALGOLIA_APP_ID: ${{secrets.ALGOLIA_APP_ID}}
-          ALGOLIA_SECRET: ${{secrets.ALGOLIA_SECRET}}
         run: php artisan test
