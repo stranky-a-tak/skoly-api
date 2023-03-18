@@ -2,18 +2,24 @@
 
 namespace App\Controller;
 
+use App\Repository\CollageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class CollageController extends AbstractController
 {
-    #[Route('/collage', name: 'app_collage')]
+    public function __construct(
+        private readonly CollageRepository $repository,
+        private readonly NormalizerInterface $serializer,
+    ) {
+    }
+
+    #[Route('/collages', name: 'collages')]
     public function index(): JsonResponse
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/CollageController.php',
-        ]);
+        $jsonData = $this->serializer->normalize($this->repository->findAll(), 'json');
+        return new JsonResponse($jsonData);
     }
 }
