@@ -16,4 +16,4 @@ COPY . .
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 
-ENTRYPOINT ["Docker/entrypoint.sh", "php-fpm", "-F"]
+ENTRYPOINT ["sh", "Docker/entrypoint.sh", "php-fpm", "-F"]
