@@ -2,24 +2,35 @@
 
 namespace App\Controller;
 
+use App\Dto\Collage\CollageSearchRequestDto;
 use App\Repository\CollageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
+#[Route(path: "api/collages")]
 class CollageController extends AbstractController
 {
     public function __construct(
         private readonly CollageRepository $repository,
-        private readonly NormalizerInterface $serializer,
+        private readonly SerializerInterface $serializer,
     ) {
     }
 
-    #[Route('/collages', name: 'collages')]
-    public function index(): JsonResponse
+    #[Route('', name: 'search', methods: ['POST'])]
+    public function index(Request $request): JsonResponse
     {
-        $jsonData = $this->serializer->normalize($this->repository->findAll(), 'json');
-        return new JsonResponse($jsonData);
+        $collageRequest = $this->serializer->deserialize(
+            $request->getContent(),
+            CollageSearchRequestDto::class,
+            'json'
+        );
+
+        return new JsonResponse(
+            $this->repository->getSearchResult($collageRequest->getSearch())
+        );
     }
 }
