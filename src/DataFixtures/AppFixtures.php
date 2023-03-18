@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Collage;
+use App\Entity\Review;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -11,6 +12,12 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $review = new Review();
+        $review->setRating(5);
+        $review->setBody("Nic moc uprimne");
+        $review->setCreatedAt(new DateTimeImmutable("now"));
+        $manager->persist($review);
+
         $collage = new Collage();
         $collage->setName('FEI STU');
         $collage->setSlug('fei-stu');
@@ -22,6 +29,7 @@ class AppFixtures extends Fixture
             a tvorivej výskumnej práce.'
         );
         $collage->setFoundedAt(new DateTimeImmutable("now"));
+        $collage->addReview($review);
         $manager->persist($collage);
 
         $collage = new Collage();

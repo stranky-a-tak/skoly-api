@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Collage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -42,6 +43,9 @@ class CollageRepository extends ServiceEntityRepository
     public function getSearchResult(string $query): array
     {
         return $this->createQueryBuilder('c')
+            ->addSelect('AVG(r.rating) as avg_rating')
+            ->leftJoin('c.reviews', 'r', Join::WITH, 'r.collage = c.id')
+            ->groupBy('c.id')
             ->andWhere('c.name LIKE :query')
             ->setParameter('query', '%' . $query . '%')
             ->setMaxResults(8)
