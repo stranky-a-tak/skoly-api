@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Collage\CollagesResource;
 use App\Http\Resources\Collage\ShowCollageResource;
 use App\Models\Collage;
+use App\Services\Collage\CollageService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CollageController extends Controller
 {
@@ -64,14 +67,9 @@ class CollageController extends Controller
      *    ),
      * )
      */
-    public function search(Request $request)
+    public function search(Request $request, CollageService $collageService)
     {
-        if (strlen($request->input('search')) >= 2) {
-            return CollagesResource::collection(Collage::with('ratings')->where(function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->input('search') . '%')
-                    ->orWhere('description', 'like', '%' . $request->input('search') . '%');
-            })->limit(8)->get());
-        }
+        return $collageService->getSearchResult($request);
     }
 
     /**
