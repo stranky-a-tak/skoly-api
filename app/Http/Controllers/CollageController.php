@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Collage\CollagesResource;
 use App\Http\Resources\Collage\ShowCollageResource;
 use App\Models\Collage;
 use App\Services\Collage\CollageService;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CollageController extends Controller
 {
@@ -73,7 +70,7 @@ class CollageController extends Controller
     }
 
     /**
-     * Returns a single collage resource 
+     * Returns a single collage resource
      * @OA\Get (
      *     path="/api/collage/{slug}",
      *     tags={"Collages"},

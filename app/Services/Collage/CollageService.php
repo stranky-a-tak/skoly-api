@@ -24,7 +24,7 @@ class CollageService
             return Cache::get($input);
         }
 
-        $collages = CollagesResource::collection(Collage::search()->query(function ($query) {
+        $collages = CollagesResource::collection(Collage::search($input)->query(function ($query) {
             $query->with('ratings');
         })->take(8)->get());
 

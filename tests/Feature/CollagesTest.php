@@ -38,7 +38,7 @@ class CollagesTest extends TestCase
     public function test_search_returns_correct_data()
     {
         $collage = $this->getCollage();
-        $response = $this->post('/api/collages', ['search' => 'fei']);
+        $response = $this->post('/api/collages', ['search' => $collage->name]);
 
         $response->assertOk();
         $response->assertJson(
