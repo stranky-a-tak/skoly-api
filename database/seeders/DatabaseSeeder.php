@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'FEI STU',
             'slug' => 'fei-stu',
             'description' => 'Poslaním Fakulty elektrotechniky a informatiky, jednej z najstarších
-                technických fakúlt na Slovensku s bohatou vedeckou a výskumnou činnosťou, 
+                technických fakúlt na Slovensku s bohatou vedeckou a výskumnou činnosťou,
                 je poskytovanie kvalitného vzdelávania na báze slobodného vedeckého bádania
                 a tvorivej výskumnej práce.',
         ]);
@@ -42,12 +42,12 @@ class DatabaseSeeder extends Seeder
                 Na Slovensku v súčasnosti chýba až 20 000 informatikov, v Európe dokonca až 900 000! Zaplň medzeru na trhu.',
         ]);
 
-        foreach (range(1, 300) as $test) {
+        foreach (range(1, 4) as $test) {
             Collage::factory()->create([
                 'name' => 'MTF STU',
                 'slug' => 'mtf-stu',
-                'description' => 'Materiálovotechnologická fakulta STU v Bratislave so sídlom v Trnave chce byť, v 
-                kontexte s víziou STU, výskumne orientovanou, celoslovensky a medzinárodne uznávanou a priemyslom akceptovanou fakultou. 
+                'description' => 'Materiálovotechnologická fakulta STU v Bratislave so sídlom v Trnave chce byť, v
+                kontexte s víziou STU, výskumne orientovanou, celoslovensky a medzinárodne uznávanou a priemyslom akceptovanou fakultou.
                 Chce poskytovať špičkové, medzinárodne porovnateľné vzdelávanie a rozvíjať moderné trendy vo výskume a priemyselnej výrobe.',
             ]);
         }
